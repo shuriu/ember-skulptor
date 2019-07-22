@@ -1,0 +1,8 @@
+.skulptor-field {
+  @apply mb-4
+}
+
+
+* {
+  outline: 1px solid red;
+}

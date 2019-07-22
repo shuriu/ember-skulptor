@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+label {
+  @apply select-none;
+}
+
+.skulptor-field {
+  @apply mb-4
+}
+
+.skulptor-field-label {
+  @apply block
+    uppercase
+    tracking-wide
+    font-bold
+    text-sm
+}
+
+.skulptor-field-input {
+  -webkit-appearance: none;
+
+  @apply w-full
+    px-4
+    py-2
+    my-1
+    border
+    rounded
+}
+
+.skulptor-field-input:focus {
+  @apply outline-none
+    shadow-outline
+}
+
+.skulptor-help-text {
+  @apply
+    text-gray-600
+    text-xs
+    italic
+}
+
+.skulptor-error-text {
+  @apply
+    text-red-600
+    text-xs
+    italic
+}

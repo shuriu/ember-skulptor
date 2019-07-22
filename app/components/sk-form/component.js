@@ -1,0 +1,1 @@
+export { default } from 'ember-skulptor/components/sk-form/component';

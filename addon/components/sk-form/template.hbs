@@ -1,0 +1,11 @@
+{{yield (hash
+  isSubmitting=submitTask.isRunning
+  didSubmit=didSubmit
+  object=object
+
+  field=(component 'sk-field'
+    object=object
+    isSubmitting=submitTask.isRunning
+    didSubmit=didSubmit
+  )
+)}}

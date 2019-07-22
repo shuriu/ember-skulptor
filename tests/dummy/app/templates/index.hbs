@@ -1,0 +1,43 @@
+{{!-- <DocsHero /> --}}
+
+<div class='container max-w-xl'>
+
+  {{#docs-demo as |demo|}}
+    {{#demo.example name='docs-demo-basic.hbs'}}
+      <SkForm @object={{model}} as |form|>
+        <form.field @attribute='title' as |field|>
+          <field.label class='font-medium tracking-wide' />
+          <field.input class='skulptor-field-input {{if field.isInvalid 'border-red-400'}}' />
+
+          {{#if field.isInvalid}}
+            <p class='skulptor-error-text'>{{field.errorMessage}}</p>
+          {{/if}}
+        </form.field>
+
+        <form.field @attribute='body' as |field|>
+          <field.label class='font-medium tracking-wide' />
+          <field.textarea rows='5' class='skulptor-field-input {{if field.isInvalid 'border-red-400'}}' />
+
+          {{#if field.isInvalid}}
+            <p class='skulptor-error-text'>{{field.errorMessage}}</p>
+          {{/if}}
+        </form.field>
+
+        <form.field @attribute='published' class='mb-4 flex items-center' as |field|>
+          <field.checkbox />
+          <field.label class='ml-3 font-medium tracking-wide' />
+        </form.field>
+
+        <button type='submit' class='px-4 py-2 bg-green-700 text-white text-border rounded shadow'>
+          {{#if form.isSubmitting}}
+            Saving...
+          {{else}}
+            Save
+          {{/if}}
+        </button>
+      </SkForm>
+    {{/demo.example}}
+
+    {{demo.snippet 'docs-demo-basic.hbs' label=''}}
+  {{/docs-demo}}
+</div>

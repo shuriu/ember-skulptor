@@ -1,0 +1,41 @@
+{{yield (hash
+  object=object
+  attribute=attribute
+  value=(get object attribute)
+  id=id
+  name=name
+  labelText=labelText
+  errorMessage=errorMessage
+  isInvalid=isInvalid
+
+  label=(component 'sk-field/label'
+    for=id
+    text=labelText
+  )
+
+  input=(component 'sk-field/input'
+    object=object
+    attribute=attribute
+    id=id
+    name=name
+    value=(get object attribute)
+    placeholder=labelText
+  )
+
+  checkbox=(component 'sk-field/checkbox'
+    object=object
+    attribute=attribute
+    id=id
+    name=name
+    checked=(get object attribute)
+  )
+
+  textarea=(component 'sk-field/textarea'
+    object=object
+    attribute=attribute
+    id=id
+    name=name
+    value=(get object attribute)
+    placeholder=labelText
+  )
+)}}
