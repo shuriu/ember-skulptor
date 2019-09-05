@@ -1,41 +1,44 @@
 {{yield (hash
-  object=object
-  attribute=attribute
-  value=(get object attribute)
-  id=id
-  name=name
-  labelText=labelText
+  object=this.object
+  attribute=this.attribute
+  value=(get this.object this.attribute)
+  id=this.id
+  name=this.name
+  labelValue=this.labelValue
   errorMessage=errorMessage
-  isInvalid=isInvalid
+  isInvalid=this.isInvalid
 
   label=(component 'sk-field/label'
-    for=id
-    text=labelText
+    for=this.id
+    text=this.labelValue
   )
 
   input=(component 'sk-field/input'
-    object=object
-    attribute=attribute
-    id=id
-    name=name
-    value=(get object attribute)
-    placeholder=labelText
-  )
-
-  checkbox=(component 'sk-field/checkbox'
-    object=object
-    attribute=attribute
-    id=id
-    name=name
-    checked=(get object attribute)
+    object=this.object
+    attribute=this.attribute
+    disabled=this.disabled
+    id=this.id
+    name=this.name
+    value=(get this.object this.attribute)
+    placeholder=this.placeholderValue
+    autocomplete=this.autocompleteValue
   )
 
   textarea=(component 'sk-field/textarea'
-    object=object
-    attribute=attribute
-    id=id
-    name=name
-    value=(get object attribute)
-    placeholder=labelText
+    object=this.object
+    attribute=this.attribute
+    id=this.id
+    name=this.name
+    value=(get this.object this.attribute)
+    placeholder=this.placeholderValue
+    autocomplete=this.autocompleteValue
+  )
+
+  checkbox=(component 'sk-field/checkbox'
+    object=this.object
+    attribute=this.attribute
+    id=this.id
+    name=this.name
+    checked=(get this.object this.attribute)
   )
 )}}

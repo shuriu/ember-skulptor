@@ -1,6 +1,6 @@
 {
   "name": "ember-skulptor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Complex ember forms made easy.",
   "keywords": [
     "ember-addon"

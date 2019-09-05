@@ -3,7 +3,7 @@ import layout from './template';
 import { get, getWithDefault, computed } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 import { isPresent, isBlank } from '@ember/utils';
-import { decamelize } from '@ember/string';
+import { decamelize, dasherize } from '@ember/string';
 import Ember from 'ember';
 const { mixin } = Ember;
 
@@ -13,6 +13,8 @@ export default Component.extend({
   // Defaults
   object: null,
   attribute: null,
+  labelText: null,
+  placeholderText: null,
 
   init() {
     this._super(...arguments);
@@ -48,7 +50,24 @@ export default Component.extend({
     }
   }),
 
-  labelText: computed('attribute', function () {
+  required: computed('object', 'attribute', function () {
+    if (isBlank(this.attribute) || isBlank(this.object)) {
+      return false;
+    }
+
+    let presenceValidatorPath = `validations.attrs.${this.attribute}.options.presence.presence`;
+    return this.object.get(presenceValidatorPath);
+  }),
+
+  disabled: computed('isSubmitting', function () {
+    return this.isSubmitting;
+  }),
+
+  labelValue: computed('attribute', 'labelText', function () {
+    if (isPresent(this.labelText)) {
+      return this.labelText;
+    }
+
     if (isBlank(this.attribute)) {
       return;
     }
@@ -57,5 +76,32 @@ export default Component.extend({
 
     let result = string.toLowerCase().replace(/_+/g, ' ');
     return result.charAt(0).toUpperCase() + result.slice(1);
+  }),
+
+  placeholderValue: computed('placeholderText', 'labelValue', 'required', function () {
+    if (isPresent(this.placeholderText)) {
+      return this.placeholderText;
+    } else {
+      let requiredLabel = '';
+
+      if (this.required) {
+        requiredLabel = '(required)';
+      }
+
+      return `${this.labelValue} ${requiredLabel}`;
+    }
+  }),
+
+  autocompleteValue: computed('autocomplete', 'attribute', function () {
+    if (isPresent(this.autocomplete)) {
+      return this.autocomplete;
+    } else {
+      // TODO: Note create an array of valid autocomplete values from MDN:
+      //  https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values
+      //
+      //  Then test that the attribute is included in that list. If it's not included
+      //  just return 'on' by default.
+      return dasherize(this.attribute);
+    }
   })
 });
