@@ -27,13 +27,15 @@ export default Component.extend({
   submitTask: task(function* () {
     let shouldContinue = yield this.beforeSubmit();
 
-    if (shouldContinue) {
-      yield all([
-        this.onSubmit(),
-        timeout(this.afterSubmitTimeout)
-      ]);
-
-      yield this.afterSubmit();
+    if (!shouldContinue) {
+      return false;
     }
+
+    let [submitResult, ] = yield all([
+      this.onSubmit(),
+      timeout(this.afterSubmitTimeout)
+    ]);
+
+    yield this.afterSubmit(submitResult);
   }).restartable()
 });
